@@ -9,15 +9,24 @@
 #define CYAN    11
 #define BLANCO   15
 
-void printLine(int length, char symbol);
 void color(int color);
 void menu();
+void verificarArchivo(char archivo[]);
+
+const char tpFinal[] = "Gestor de Stock V0.02";
 
 int main()
 {
     int opc;
-    char listadoFile[] = "listado.bin";
     int loop = 1;
+    int flag;
+    char listadoFile[] = "listado.bin";
+    FILE *listado;
+
+    verificarArchivo(listadoFile);
+
+
+
     while(loop == 1)
     {
         menu();
@@ -69,11 +78,12 @@ int main()
 void menu()
 {
     color(CYAN);
-    printf("||=====================================================||\n");
+    printf("  _____________________________________________________  \n");
+    printf("||                                                     ||\n");
     printf("||                                                     ||\n");
     printf("||");
     color(BLANCO);
-    printf("             GESTOR DE STOCK        v0.1             ");
+    printf("                %s                ", tpFinal);
     color(CYAN);
     printf("||\n");
     printf("||                                                     ||\n");
@@ -114,7 +124,7 @@ void menu()
     color(ROJO);
     printf(" 6. SALIR                                            ");
     color(CYAN);
-    printf("||\n"); /**AGREGAR MAS OPCIONES AC¡ */
+    printf("||\n"); /**AGREGAR MAS OPCIONES AC√Å */
     printf("||                                                     ||\n");
     printf("||_____________________________________________________||");
     printf("\n\n  Ingrese su opcion: ");
@@ -125,6 +135,62 @@ void color(int color)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(hConsole, color);
+}
+
+void verificarArchivo(char archivo[])
+{
+    FILE *arch;
+    arch = fopen(archivo, "rb");
+    color(AMARILLO);
+    printf("  %s\n",tpFinal);
+    color(BLANCO);
+    printf("\n  Verificando la existencia del listado...");
+    Sleep(2000);
+    if(arch != NULL)
+    {
+        system("cls");
+        color(AMARILLO);
+        printf("  %s\n",tpFinal);
+        color(VERDE);
+        printf("\n  El archivo existe!\n\n  Entrando al menu...");
+        fclose(arch);
+        Sleep(2000);
+        system("cls");
+    }
+    else
+    {
+        system("cls");
+        color(AMARILLO);
+        printf("  %s\n",tpFinal);
+        color(ROJO);
+        printf("\n  El archivo NO existe!");
+        Sleep(500);
+        color(BLANCO);
+        printf("\n\n  Creando el arhivo...");
+        Sleep(2000);
+        arch = fopen(archivo, "ab");
+        if(arch != NULL)
+        {
+            system("cls");
+            color(AMARILLO);
+            printf("  %s\n",tpFinal);
+            color(VERDE);
+            printf("\n  Archivo creado exitosamente!\n\n  Entrando al menu...");
+            Sleep(2000);
+            fclose(arch);
+            system("cls");
+        }
+        else
+        {
+            system("cls");
+            color(AMARILLO);
+            printf("  %s\n",tpFinal);
+            color(ROJO);
+            printf("\n  Error inesperado al crear el archivo!\n\n  Cerrando el programa...");
+            color(BLANCO);
+            exit(1);
+        }
+    }
 }
 
 
