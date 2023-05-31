@@ -145,7 +145,7 @@ void verificarArchivo(char archivo[])
     printf("  %s\n",tpFinal);
     color(BLANCO);
     printf("\n  Verificando la existencia del listado...");
-    Sleep(2000);
+    Sleep(1500);
     if(arch != NULL)
     {
         system("cls");
@@ -154,7 +154,7 @@ void verificarArchivo(char archivo[])
         color(VERDE);
         printf("\n  El archivo existe!\n\n  Entrando al menu...");
         fclose(arch);
-        Sleep(2000);
+        Sleep(1250);
         system("cls");
     }
     else
@@ -164,7 +164,6 @@ void verificarArchivo(char archivo[])
         printf("  %s\n",tpFinal);
         color(ROJO);
         printf("\n  El archivo NO existe!");
-        Sleep(500);
         color(BLANCO);
         printf("\n\n  Creando el arhivo...");
         Sleep(2000);
@@ -176,7 +175,7 @@ void verificarArchivo(char archivo[])
             printf("  %s\n",tpFinal);
             color(VERDE);
             printf("\n  Archivo creado exitosamente!\n\n  Entrando al menu...");
-            Sleep(2000);
+            Sleep(1250);
             fclose(arch);
             system("cls");
         }
@@ -192,5 +191,3 @@ void verificarArchivo(char archivo[])
         }
     }
 }
-
-
